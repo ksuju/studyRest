@@ -26,7 +26,7 @@ public class ApiV1ArticleController {
         return "다건";
     }
 
-    @GetMapping("/${id}")  // 단건 조회
+    @GetMapping("/{id}")  // 단건 조회
     public String getArticle() {
         return "단건";
     }
@@ -36,12 +36,17 @@ public class ApiV1ArticleController {
         return "생성";
     }
 
-    @PatchMapping("/${id}")    // 수정
-    public String modify() {
-        return "수정";
+    @PatchMapping("/{id}")    // 수정
+    public String patchModify() {
+        return "PATCH 수정";
     }
 
-    @DeleteMapping("/${id}")   // 삭제
+    @PutMapping("/{id}")    // 수정
+    public String putModify() {
+        return "PUT 수정";
+    }
+
+    @DeleteMapping("/{id}")   // 삭제
     public String delete() {
         return "삭제";
     }
