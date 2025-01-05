@@ -2,11 +2,10 @@ package com.ll.studyRest.controller;
 
 import com.ll.global.rsData.RsData;
 import com.ll.studyRest.dto.ArticleDTO;
+import com.ll.studyRest.dto.ArticleCreateRequest;
 import com.ll.studyRest.entity.Article;
 import com.ll.studyRest.service.ArticleService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,30 +43,23 @@ public class ApiV1ArticleController {
         return RsData.of("200", "데이터 단건 조회 성공", new ArticleDTO(article.get()));   // 데이터 단건 조회
     }
 
-    @Data
-    public static class ArticleRequest {
-        @NotBlank
-        private String subject;
-        @NotBlank
-        private String content;
-    }
     @PostMapping("")    // 등록
-    public String create(@Valid @RequestBody ArticleRequest articleRequest) { // 생성
-        articleService.create(articleRequest);
+    public String create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest) { // 생성
+        articleService.create(articleCreateRequest);
         return "생성완료";
     }
 
     @PatchMapping("/{id}")    // 수정
-    public RsData patchModify(@PathVariable("id") Long id, @RequestBody ArticleRequest articleRequest) {
+    public RsData patchModify(@PathVariable("id") Long id, @RequestBody ArticleCreateRequest articleCreateRequest) {
 
-        articleService.modify(id, articleRequest);
+        articleService.modify(id, articleCreateRequest);
         return RsData.of("200","PATCH_수정완료");
     }
 
     @PutMapping("/{id}")    // 수정
-    public RsData putModify(@PathVariable("id") Long id, @RequestBody ArticleRequest articleRequest) {
+    public RsData putModify(@PathVariable("id") Long id, @RequestBody ArticleCreateRequest articleCreateRequest) {
 
-        articleService.modify(id, articleRequest);
+        articleService.modify(id, articleCreateRequest);
         return RsData.of("200","PUT_수정완료");
     }
 
