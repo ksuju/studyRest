@@ -1,5 +1,11 @@
-package com.ll.studyRest.repository;/**
- *packageName    : com.ll.studyRest.repository
+package com.ll.studyRest.repository;
+
+import com.ll.studyRest.entity.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * packageName    : com.ll.studyRest.repository
  * fileName       : ArticleRepository
  * author         : sungjun
  * date           : 2025-01-05
@@ -8,5 +14,7 @@ package com.ll.studyRest.repository;/**
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2025-01-05        kyd54       최초 생성
- */public interface ArticleRepository {
+ */
+@Repository
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 }
