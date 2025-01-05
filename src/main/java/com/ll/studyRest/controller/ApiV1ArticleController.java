@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName    : com.ll.studyRest.controller
@@ -28,56 +29,46 @@ public class ApiV1ArticleController {
 
     @GetMapping("")    // 다건 조회
     public List<ArticleDTO> list() {
-        List<ArticleDTO> articleList = new ArrayList<>();
-
-        // 임시 데이터 삽입
-        Article article1 = new Article("제목1", "내용1");
-        articleList.add(new ArticleDTO(article1));
-
-        Article article2 = new Article("제목2", "내용2");
-        articleList.add(new ArticleDTO(article2));
-
-        Article article3 = new Article("제목3", "내용3");
-        articleList.add(new ArticleDTO(article3));
+        List<ArticleDTO> articleList = articleService.findAll();
 
         return articleList;
     }
 
     @GetMapping("/{id}")  // 단건 조회
-    public ArticleDTO getArticle() {
-        List<ArticleDTO> articleList = new ArrayList<>();
+    public ArticleDTO getArticle(@PathVariable Long id) {
 
-        // 임시 데이터 삽입
-        Article article1 = new Article("제목1", "내용1");
-        articleList.add(new ArticleDTO(article1));
+        Optional<Article> article = articleService.findById(id);
 
-        Article article2 = new Article("제목2", "내용2");
-        articleList.add(new ArticleDTO(article2));
 
-        Article article3 = new Article("제목3", "내용3");
-        articleList.add(new ArticleDTO(article3));
-
-        return articleList.get(0);  // 0번 인덱스에 저장된 데이터 단건 조회
+        return new ArticleDTO(article.get());   // 데이터 단건 조회
     }
 
-    @PostMapping("")   // 생성
-    public String create() {
-        return "생성";
+    @PostMapping("")
+    public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) { // 생성
+
+        articleService.create(subject, content);
+        return "생성완료";
     }
 
     @PatchMapping("/{id}")    // 수정
-    public String patchModify() {
-        return "PATCH 수정";
+    public String patchModify(@PathVariable("id") Long id, @RequestParam("subject") String subject, @RequestParam("content") String content) {
+
+        articleService.modify(id, subject, content);
+        return "PATCH_수정완료";
     }
 
     @PutMapping("/{id}")    // 수정
-    public String putModify() {
-        return "PUT 수정";
+    public String putModify(@PathVariable("id") Long id, @RequestParam("subject") String subject, @RequestParam("content") String content) {
+
+        articleService.modify(id, subject, content);
+        return "PUT_수정완료";
     }
 
     @DeleteMapping("/{id}")   // 삭제
-    public String delete() {
-        return "삭제";
+    public String delete(@PathVariable("id") Long id) {
+
+        articleService.delete(id);
+        return "삭제완료";
     }
 
 }

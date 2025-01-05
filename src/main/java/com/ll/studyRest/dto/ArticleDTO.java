@@ -2,6 +2,7 @@ package com.ll.studyRest.dto;
 
 import com.ll.studyRest.entity.Article;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
