@@ -37,8 +37,6 @@ public class ArticleService {
         // Article 엔티티 리스트를 데이터베이스에서 조회
         List<Article> articles = articleRepository.findAll();
 
-        System.out.println("articles========" + articles);
-
         // 각 Article 엔티티 객체를 ArticleDTO로 변환하여 리스트로 반환
         return articles.stream()
                 .map(article -> new ArticleDTO(article))
