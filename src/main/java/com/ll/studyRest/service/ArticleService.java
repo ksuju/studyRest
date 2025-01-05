@@ -1,5 +1,6 @@
 package com.ll.studyRest.service;
 
+import com.ll.studyRest.controller.ApiV1ArticleController;
 import com.ll.studyRest.dto.ArticleDTO;
 import com.ll.studyRest.entity.Article;
 import com.ll.studyRest.repository.ArticleRepository;
@@ -45,21 +46,21 @@ public class ArticleService {
     }
 
     // 생성
-    public void create(String subject, String content) {
-        Article article = new Article(subject, content);
+    public void create(ApiV1ArticleController.ArticleRequest articleRequest) {
+        Article article = new Article(articleRequest.getSubject(), articleRequest.getContent());
         articleRepository.save(article);
     }
 
     // 수정
-    public void modify(Long id, String subject, String content) {
+    public void modify(Long id, ApiV1ArticleController.ArticleRequest articleRequest) {
         // id에 해당하는 article 가져옴
         Optional<Article> optionalArticle = articleRepository.findById(id);
 
         // 값이 존재할 때 수정
         if (optionalArticle.isPresent()) {
             Article article = optionalArticle.get();
-            article.setSubject(subject);
-            article.setContent(content);
+            article.setSubject(articleRequest.getSubject());
+            article.setContent(articleRequest.getContent());
 
             // 변경 사항 저장
             articleRepository.save(article);

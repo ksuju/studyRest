@@ -1,4 +1,4 @@
-package com.ll.global;
+package com.ll.global.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;

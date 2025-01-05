@@ -1,7 +1,7 @@
 package com.ll.studyRest.entity;
 
 
-import com.ll.global.BaseEntity;
+import com.ll.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
